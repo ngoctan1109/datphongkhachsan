@@ -17,25 +17,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
     ListView lv;
-
+    String[] values = new String[]{"Phòng 001", "Phòng 002", "Phòng 003", "Phòng 004", "Phòng 005", "Phòng 006", "Phòng 007",
+            "Phòng 008", "Phòng 008", "Phòng 010"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        lv = (ListView) findViewById(R.id.lvroom);
-        String[] values = new String[]{"Phòng 001", "Phòng 002", "Phòng 003", "Phòng 004", "Phòng 005", "Phòng 006", "Phòng 007",
-                "Phòng 008", "Phòng 008", "Phòng 010"};
+        lv = (ListView)findViewById(R.id.lvroom);
         ArrayList<String> srcList = new ArrayList<String>(Arrays.asList(values));
         lv.setAdapter(new CustomListAdapter(this, srcList));
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent iHienthi = new Intent(MainActivity.this,datphong.class);
-                startActivity(iHienthi);
-            }
-        });
+        lv.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent idatphong=new Intent(MainActivity.this,datphong.class);
+        startActivity(idatphong);
     }
 
     public class CustomListAdapter extends BaseAdapter {
