@@ -93,10 +93,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edtngaytr"
-        android:layout_toRightOf="@+id/txtngaytr"
         android:layout_alignRight="@+id/edtngaybd"
         android:layout_alignEnd="@+id/edtngaybd"
-        android:layout_below="@+id/txtngaybd" />
+        android:layout_below="@+id/txtngaybd"
+        android:layout_toRightOf="@+id/txtngaybd"
+        android:layout_toEndOf="@+id/txtngaybd" />
 
     <Button
         android:layout_width="wrap_content"

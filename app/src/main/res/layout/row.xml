@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:weightSum="1"
+    android:id="@+id/row">
+
+    <ImageView
+        android:layout_width="97dp"
+        android:layout_height="97dp"
+        android:id="@+id/imgroom"
+        android:src="@drawable/room" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/txtroom" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="82dp"
+        android:text="Đặt Phòng"
+        android:id="@+id/btndatphong"
+        android:layout_weight="0.69" />
+</LinearLayout>

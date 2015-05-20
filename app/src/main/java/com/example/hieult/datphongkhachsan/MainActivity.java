@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
     ListView lv;
+
     String[] values = new String[]{"Phòng 001", "Phòng 002", "Phòng 003", "Phòng 004", "Phòng 005", "Phòng 006", "Phòng 007",
             "Phòng 008", "Phòng 008", "Phòng 010"};
     @Override
@@ -29,8 +31,15 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         ArrayList<String> srcList = new ArrayList<String>(Arrays.asList(values));
         lv.setAdapter(new CustomListAdapter(this, srcList));
         lv.setOnItemClickListener(this);
+        Button btntest=(Button)findViewById(R.id.button);
+        btntest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ihienthi=new Intent(MainActivity.this,datphong.class);
+                startActivity(ihienthi);
+            }
+        });
     }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent idatphong=new Intent(MainActivity.this,datphong.class);
