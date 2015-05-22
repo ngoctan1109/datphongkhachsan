@@ -29,7 +29,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         lv = (ListView)findViewById(R.id.lvroom);
         ArrayList<String> srcList = new ArrayList<String>(Arrays.asList(values));
-        lv.setAdapter(new CustomListAdapter(this, srcList));
+        lv.setAdapter(new MyArrayAdapter(this, srcList));
         lv.setOnItemClickListener(this);
         Button btntest=(Button)findViewById(R.id.button);
         btntest.setOnClickListener(new View.OnClickListener() {
