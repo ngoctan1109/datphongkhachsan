@@ -20,6 +20,14 @@
             android:name=".datphong"
             android:label="@string/title_activity_datphong" >
         </activity>
+        <activity
+            android:name="com.example.tn.asynctaskloadimagestolistview.xemthongtin"
+            android:label="@string/title_activity_xemthongtin" >
+        </activity>
+        <activity
+            android:name=".xemthongtin"
+            android:label="@string/title_activity_xemthongtin" >
+        </activity>
     </application>
 
 </manifest>

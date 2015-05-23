@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.hieult.datphongkhachsan.xemthongtin">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Họ Tên: "
+        android:id="@+id/txthoten"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edthoten"
+        android:layout_alignBottom="@+id/txthoten"
+        android:layout_toRightOf="@+id/txthoten"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="CMND :"
+        android:id="@+id/txtcmnd"
+        android:layout_alignBottom="@+id/edtcmnd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtcmnd"
+        android:layout_below="@+id/txthoten"
+        android:layout_alignRight="@+id/edthoten"
+        android:layout_alignEnd="@+id/edthoten"
+        android:layout_alignLeft="@+id/edthoten"
+        android:layout_alignStart="@+id/edthoten" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="SĐT :"
+        android:id="@+id/txtsdt"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/txtcmnd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtsdt"
+        android:layout_below="@+id/edtcmnd"
+        android:layout_alignLeft="@+id/edtcmnd"
+        android:layout_alignStart="@+id/edtcmnd"
+        android:layout_alignRight="@+id/edtcmnd"
+        android:layout_alignEnd="@+id/edtcmnd" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Email :"
+        android:id="@+id/txtemail"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/txtsdt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_below="@+id/txtsdt"
+        android:layout_alignLeft="@+id/edtsdt"
+        android:layout_alignStart="@+id/edtsdt"
+        android:layout_alignRight="@+id/edtsdt"
+        android:layout_alignEnd="@+id/edtsdt" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Xem Thông Tin"
+        android:id="@+id/btnxem"
+        android:layout_below="@+id/txtemail"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="43dp"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText" />
+</RelativeLayout>
