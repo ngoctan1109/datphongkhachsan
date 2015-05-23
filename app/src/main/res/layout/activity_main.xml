@@ -21,20 +21,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lvroom"
-        android:layout_below="@+id/txttieude"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_below="@+id/btnxemtt" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_alignParentTop="true"
+        android:text="Xem Thông Tin"
+        android:id="@+id/btnxemtt"
+        android:layout_below="@+id/txttieude"
+        android:layout_alignRight="@+id/lvroom"
+        android:layout_alignEnd="@+id/lvroom" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtloaiphong"
+        android:layout_alignBottom="@+id/btntim"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="224dp"
-        android:layout_marginStart="224dp" />
+        android:layout_toLeftOf="@+id/btntim"
+        android:layout_toStartOf="@+id/btntim"
+        android:text="Loại phòng" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tìm"
+        android:id="@+id/btntim"
+        android:layout_alignTop="@+id/btnxemtt"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

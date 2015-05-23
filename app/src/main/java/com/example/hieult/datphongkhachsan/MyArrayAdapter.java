@@ -14,10 +14,10 @@ import java.util.ArrayList;
  * Created by Tân on 5/22/2015.
  */
 public class MyArrayAdapter extends BaseAdapter {
-    private ArrayList<String> listData;
+    private ArrayList<room> listData;
     private LayoutInflater layoutInflater;
 
-    public MyArrayAdapter(Context context, ArrayList<String> listData) {
+    public MyArrayAdapter(Context context, ArrayList<room> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -42,18 +42,18 @@ public class MyArrayAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.row, null);
             holder = new ViewHolder();
-            holder.text = (TextView) convertView.findViewById(R.id.txtroom);
+            holder.txtnameroom = (TextView) convertView.findViewById(R.id.txtroom);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
-        holder.text.setText(String.valueOf(position));
+        room room=(room)getItem(position);
+        holder.txtnameroom.setText(room.getNameroom());
         return convertView;
     }
 
     class ViewHolder {
         ImageView icon;
-        TextView text;
+        TextView txtnameroom;
     }
 }

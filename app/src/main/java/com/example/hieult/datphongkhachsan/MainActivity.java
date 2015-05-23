@@ -9,13 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
@@ -28,17 +26,13 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lv = (ListView)findViewById(R.id.lvroom);
-        ArrayList<String> srcList = new ArrayList<String>(Arrays.asList(values));
+        ArrayList<room> srcList = new ArrayList<room>();
+        for (int i = 0; i < values.length; i++) {
+            room item = new room(values[i]);
+            srcList.add(item);
+        }
         lv.setAdapter(new MyArrayAdapter(this, srcList));
         lv.setOnItemClickListener(this);
-        Button btntest=(Button)findViewById(R.id.button);
-        btntest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ihienthi=new Intent(MainActivity.this,datphong.class);
-                startActivity(ihienthi);
-            }
-        });
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
