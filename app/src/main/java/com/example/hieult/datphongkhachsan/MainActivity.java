@@ -91,7 +91,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             HttpClient httpclient = new DefaultHttpClient();
             //chổ này bác nào xài emulator thì thay IP thành 10.0.2.2:locahost_portnumber nha
             //còn xài đt thì dùng IP máy của bác
-            HttpPost httppost = new HttpPost("http://192.168.0.104:80/hotel/test.php");
+            HttpPost httppost = new HttpPost("http://10.0.2.2:80/hotel/test.php");
             HttpResponse response = httpclient.execute(httppost);
             HttpEntity entity = response.getEntity();
             is = entity.getContent();
