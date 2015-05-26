@@ -29,5 +29,5 @@
             android:label="@string/title_activity_xemthongtin" >
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
