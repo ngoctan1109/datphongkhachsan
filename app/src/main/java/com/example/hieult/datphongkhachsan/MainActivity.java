@@ -38,7 +38,6 @@ import java.util.ArrayList;
 //            "Phòng 008", "Phòng 008", "Phòng 010"};
 
 public class MainActivity extends Activity {
-       ArrayList<Room> mylist = new ArrayList<Room>();
 
     class Room {
         public int r_id;
@@ -81,6 +80,7 @@ public class MainActivity extends Activity {
         });
     }
 
+    ArrayList<Room> mylist;
     public class JSONParse extends AsyncTask<Void, String, String> {
         public ProgressDialog pDialog;
 
@@ -127,6 +127,7 @@ public class MainActivity extends Activity {
         protected void onPostExecute(String json) {
             super.onPostExecute(json);
             pDialog.dismiss();
+            mylist = new ArrayList<Room>();
             try {
                 jArray = new JSONArray(result);
                 for (int i = 0; i < jArray.length(); i++) {
