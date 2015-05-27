@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +31,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
+import com.example.hieult.datphongkhachsan.Room_helpers;
 //public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
 //    ListView lv;
 //    Button btnxemthongtin;
@@ -43,6 +44,8 @@ public class MainActivity extends Activity {
         public int r_id;
         public String r_name;
         public double r_price;
+        public int r_type;
+        public String r_img;
     }
 
     public JSONArray jArray;
@@ -53,7 +56,7 @@ public class MainActivity extends Activity {
     public JSONArray room = null;
     public FancyAdapter fa = null;
     static ArrayList<String> rs;
-    public static String base_url="http://192.168.56.1:8080/hotel/"; //chổ này mấy bác gõ ipconfig rồi lấy port của máy mình bỏ vô nha
+    public static String base_url="http://192.168.23.1:80/"; //chổ này mấy bác gõ ipconfig rồi lấy port của máy mình bỏ vô nha
     public static String webservice_file;
     static String url;
 //    String[] values = new String[]{"Phòng 001", "Phòng 002", "Phòng 003", "Phòng 004", "Phòng 005", "Phòng 006", "Phòng 007","Phòng 008", "Phòng 008", "Phòng 010"};
@@ -62,7 +65,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        webservice_file = "hotel/test.php";
+        webservice_file = "test.php";
         url = base_url+webservice_file;
         JSONParse j = new JSONParse();
         j.execute();
@@ -78,6 +81,14 @@ public class MainActivity extends Activity {
             }
 
         });
+        Button btntest=(Button)findViewById(R.id.btnxemtt);
+        btntest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ihienthi=new Intent(MainActivity.this,datphong.class);
+                startActivity(ihienthi);
+            }
+        });
     }
 
     ArrayList<Room> mylist;
@@ -88,7 +99,7 @@ public class MainActivity extends Activity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Getting Data ...");
+            pDialog.setMessage("Loading ...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -136,6 +147,8 @@ public class MainActivity extends Activity {
                     rs.r_id = json_data.getInt("id");
                     rs.r_name = json_data.getString("name");
                     rs.r_price = json_data.getDouble("price");
+                    rs.r_type = json_data.getInt("room_type");
+                    rs.r_img = json_data.getString("image");
                     mylist.add(rs);
                 }////
                 ListView lv = (ListView) findViewById(R.id.lvroom);
@@ -202,6 +215,8 @@ public class MainActivity extends Activity {
         public TextView id = null;
         public TextView name = null;
         public TextView price = null;
+        public TextView type = null;
+        public ImageView image = null;
 
         //        ImageView icon;
 //        TextView text;
@@ -209,12 +224,16 @@ public class MainActivity extends Activity {
             id = (TextView) row.findViewById(R.id.item_id);
             name = (TextView) row.findViewById(R.id.item_name);
             price = (TextView) row.findViewById(R.id.item_price);
+            type = (TextView) row.findViewById(R.id.item_room_type);
+            image = (ImageView) row.findViewById(R.id.item_img);
         }
 
         void populateFrom(Room r) {
             id.setText(Integer.toString(r.r_id));
             name.setText(r.r_name);
             price.setText(Double.toString(r.r_price));
+            type.setText(Room_helpers.getRoomType(r.r_type));
+            image.setImageResource(R.drawable.room);
         }
     }
 

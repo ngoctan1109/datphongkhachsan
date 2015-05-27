@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="vertical">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/item_id" />
+        android:layout_height="100dp"
+        android:id="@+id/item_img"
+        android:layout_margin="5dp"
+        android:src="@drawable/room" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/item_name" />
+        android:id="@+id/item_name"
+        android:autoText="false"
+        android:textColor="#ffcf2713" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,5 +26,19 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/item_price" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/item_room_type" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/item_id" />
 
 </LinearLayout>
