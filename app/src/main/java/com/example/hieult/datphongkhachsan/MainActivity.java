@@ -81,14 +81,14 @@ public class MainActivity extends Activity {
             }
 
         });
-        Button btntest=(Button)findViewById(R.id.btnxemtt);
-        btntest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ihienthi=new Intent(MainActivity.this,datphong.class);
-                startActivity(ihienthi);
-            }
-        });
+//        Button btntest=(Button)findViewById(R.id.btnxemtt);
+//        btntest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent ihienthi=new Intent(MainActivity.this,datphong.class);
+//                startActivity(ihienthi);
+//            }
+//        });
     }
 
     ArrayList<Room> mylist;
@@ -231,9 +231,9 @@ public class MainActivity extends Activity {
         void populateFrom(Room r) {
             id.setText(Integer.toString(r.r_id));
             name.setText(r.r_name);
-            price.setText(Double.toString(r.r_price));
-            type.setText(Room_helpers.getRoomType(r.r_type));
-            image.setImageResource(R.drawable.room);
+            price.setText("Giá: " + Double.toString(r.r_price)+" vnđ/đêm");
+            type.setText("Loại phòng: "+Room_helpers.getRoomType(r.r_type));
+            image.setImageResource(Room_helpers.getRoomImage(r.r_type));
         }
     }
 
