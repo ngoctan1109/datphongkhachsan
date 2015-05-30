@@ -1,20 +1,71 @@
 package com.example.hieult.datphongkhachsan;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class datphong extends ActionBarActivity {
+    TextView txtphong ;
+    EditText hoten , email,ngaynhan,ngaytra,cmnd,sdt;
+    Button btndatphong ;
+    String id , name ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datphong);
         EditText txtngaynhan=(EditText)findViewById(R.id.edtngaybd);
         EditText txtngaytra=(EditText)findViewById(R.id.edtngaytr);
+        btndatphong = (Button)findViewById(R.id.btndatphong);
+        btndatphong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InsertData id = new InsertData();
+                id.execute(new String[]{"http://192.168.31.1/hotel/dangkyphong.php"});
+            }
+        });
+        hoten = (EditText)findViewById(R.id.edthoten);
+        email = (EditText)findViewById(R.id.edtemail);
+        ngaynhan=(EditText)findViewById(R.id.edtngaybd);
+        ngaytra=(EditText)findViewById(R.id.edtngaytr);
+        cmnd=(EditText)findViewById(R.id.edtcmnd);
+        sdt=(EditText)findViewById(R.id.edtsdt);
+        txtphong = (TextView)findViewById(R.id.txtphong);
+        Intent in = this.getIntent();
+        Bundle bd = in.getExtras();
+        id = bd.getString("id");
+        txtphong.setText(bd.getString("name"));
+
+
         txtngaynhan.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -56,5 +107,49 @@ public class datphong extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class InsertData extends AsyncTask<String, Void, Boolean> {
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result == true) {
+                Toast.makeText(datphong.this, " Insert thanh cong ", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(datphong.this, " Error ", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        @Override
+        protected Boolean doInBackground(String... urls) {
+
+            for (String url1 : urls) {
+                try {
+                    ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+                    pairs.add(new BasicNameValuePair("customer_name", hoten.getText().toString()));
+                    pairs.add(new BasicNameValuePair("email", email.getText().toString()));
+                    pairs.add(new BasicNameValuePair("arrive_date", ngaynhan.getText().toString()));
+                    pairs.add(new BasicNameValuePair("leave_date", ngaytra.getText().toString()));
+                    pairs.add(new BasicNameValuePair("mobile", sdt.getText().toString()));
+                    pairs.add(new BasicNameValuePair("identity_number", cmnd.getText().toString()));
+
+                    pairs.add(new BasicNameValuePair("id_phong", id));
+
+                    HttpClient client = new DefaultHttpClient();
+                    HttpPost post = new HttpPost(url1);
+                    post.setEntity(new UrlEncodedFormEntity(pairs));
+                    HttpResponse response = client.execute(post);
+
+                } catch (ClientProtocolException e) {
+                    Toast.makeText(datphong.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    return false;
+                } catch (IOException e) {
+                    Toast.makeText(datphong.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+            }
+            return true;
+        }
     }
 }
