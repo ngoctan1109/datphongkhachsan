@@ -1,10 +1,8 @@
 package com.example.hieult.datphongkhachsan;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,14 +26,44 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class xemthongtin extends ActionBarActivity {
-    EditText edthoten,edtcmnd,edtsdt,edtemail;
-    ListView lvthongtin;
-    Button btnxem;
-    public static String base_url="http://192.168.56.1:8080/hotel/"; //chổ này mấy bác gõ ipconfig rồi lấy port của máy mình bỏ vô nha
+//import android.widget.ImageView;
+//public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+//    ListView lv;
+//    Button btnxemthongtin;
+//    String[] values = new String[]{"Phòng 001", "Phòng 002", "Phòng 003", "Phòng 004", "Phòng 005", "Phòng 006", "Phòng 007",
+//            "Phòng 008", "Phòng 008", "Phòng 010"};
+
+public class xemthongtin extends Activity {
+
+    class Room {
+        public int r_id;
+        public String r_name;
+        public double r_price;
+        public int r_type;
+        public String r_img;
+    }
+
+    public JSONArray jArray;
+    public String result = null;
     public InputStream is = null;
+    public StringBuilder sb = null;
+    public static JSONObject jObj = null;
+    public JSONArray room = null;
+    //    public FancyAdapter fa = null;
+    static ArrayList<String> rs;
+
+    public static String base_url="http://192.168.56.1:8080/hotel/"; //chổ này mấy bác gõ ipconfig rồi lấy port của máy mình bỏ vô nha
+
     public static String webservice_file;
     static String url;
+    public String url1;
+    EditText edit_timkiem ;
+    ListView lvthongtin;
+    EditText edthoten,edtcmnd,edtsdt,edtemail;
+    Button btnxem;
+
+//    String[] values = new String[]{"Phòng 001", "Phòng 002", "Phòng 003", "Phòng 004", "Phòng 005", "Phòng 006", "Phòng 007","Phòng 008", "Phòng 008", "Phòng 010"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,43 +77,31 @@ public class xemthongtin extends ActionBarActivity {
         btnxem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String hoten="hoten"+edthoten.getText().toString();
-                String email="&email="+edtemail.getText().toString();
-                    webservice_file = email;
-                    Toast.makeText(xemthongtin.this,webservice_file, Toast.LENGTH_SHORT).show();
-                   // url = base_url + webservice_file;
-                    //ListData j = new ListData();
-                   // j.execute(new String[]{url});
+                webservice_file ="xemthongtin.php?hoten="+edthoten.getText().toString()+"&email="+edtemail.getText().toString()+"&mobile="+edtsdt.getText().toString()+"&identity_number="+edtcmnd.getText().toString();
+                url = base_url+webservice_file;
+                ListData j = new ListData();
+                j.execute(new String[]{url});
             }
         });
     }
-    private class ListData extends AsyncTask<String, Void, Boolean> {
+    private class ListData extends AsyncTask<String, Void, Boolean>{
         @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            pDialog = new ProgressDialog(MainActivity.this);
-//            pDialog.setMessage("Loading ...");
-//            pDialog.setIndeterminate(false);
-//            pDialog.setCancelable(true);
-//            pDialog.show();
-//        }
         protected void onPostExecute(Boolean result) {
-            if (result == true) {
-                ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(xemthongtin.this, android.R.layout.simple_list_item_1, list1);
+            if (result == true){
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(xemthongtin.this, android.R.layout.simple_list_item_1,list1);
 
                 lvthongtin.setAdapter(adapter1);
-            } else {
-                Toast.makeText(xemthongtin.this, " Error ", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(xemthongtin.this, " Error " , Toast.LENGTH_SHORT).show();
             }
         }
-
-        String text = "";
+        String text = "" ;
         ArrayList<String> list1;
-
         @Override
         protected Boolean doInBackground(String... urls) {
-            InputStream is1;
-            for (String url1 : urls) {
+            InputStream is1 ;
+            for(String url1 : urls){
                 try {
                     HttpClient client = new DefaultHttpClient();
                     HttpPost post = new HttpPost(url1);
@@ -102,14 +118,15 @@ public class xemthongtin extends ActionBarActivity {
 
                 BufferedReader reader;
 
-                try {
-                    reader = new BufferedReader(new InputStreamReader(is1, "iso-8859-1"), 8);
-                    String line = null;
-                    while ((line = reader.readLine()) != null) {
-                        text += line + "\n";
+                try{
+                    reader = new BufferedReader(new InputStreamReader(is1,"iso-8859-1"),8);
+                    String line = null ;
+                    while ((line = reader.readLine() ) != null ){
+                        text += line + "\n" ;
                     }
                     is1.close();
-                } catch (UnsupportedEncodingException e) {
+                }
+                catch (UnsupportedEncodingException e){
                     e.printStackTrace();
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
@@ -119,9 +136,9 @@ public class xemthongtin extends ActionBarActivity {
                 try {
                     JSONArray jArray = new JSONArray(text);
 
-                    for (int i = 0; i < jArray.length(); i++) {
+                    for(int i=0 ; i<jArray.length();i++){
                         JSONObject jsonData = jArray.getJSONObject(i);
-                        list1.add(jsonData.getString("id") + " " + jsonData.getString("name") + "  " + jsonData.getString("price")+ " " + jsonData.getString("arrive_date")+ " " + jsonData.getString("leave_date"));
+                        list1.add(jsonData.getString("id_room") +" " + jsonData.getString("name") + "  "+jsonData.getString("price")+ " " + jsonData.getString("arrive_date")+ " " + jsonData.getString("leave_date"));
                     }
                 } catch (JSONException e) {
                     // TODO Auto-generated catch block
@@ -130,26 +147,5 @@ public class xemthongtin extends ActionBarActivity {
             }
             return true;
         }
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_xemthongtin, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
