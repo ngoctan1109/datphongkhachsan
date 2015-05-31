@@ -38,4 +38,20 @@ public class Room_helpers {
         }
         return rs;
     }
+
+    public static int getRoomTypeNumber(String str){
+        int rs = 0;
+        switch (str){
+            case "standard":
+                rs = 1;
+                break;
+            case "super":
+                rs = 2;
+                break;
+            case "vip":
+                rs = 3;
+                break;
+        }
+        return rs;
+    }
 }

@@ -19,7 +19,7 @@
         android:id="@+id/item_name"
         android:autoText="false"
         android:textColor="#ffcf2713"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +27,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/item_price"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center"
+        android:textColor="#ffffd712" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,14 +36,18 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/item_room_type"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
-        android:id="@+id/item_id"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/item_info"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textColor="#ff555555"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
 
 </LinearLayout>
