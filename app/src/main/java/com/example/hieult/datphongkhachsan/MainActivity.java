@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,9 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.ParseException;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
+import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -31,11 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
@@ -58,7 +53,8 @@ public class MainActivity extends Activity {
     //    public FancyAdapter fa = null;
     static ArrayList<String> rs;
 
-    public static String base_url = "http://192.168.0.103:80/hotel/"; //chổ này mấy bác gõ ipconfig rồi lấy port của máy mình bỏ vô nha
+    //public static String base_url = "http://192.168.0.103:80/hotel/"; //chổ này mấy bác gõ ipconfig rồi lấy port của máy mình bỏ vô nha
+    public static String base_url = "http://192.168.56.1:8080/hotel/"; //chổ này mấy bác gõ ipconfig rồi lấy port của máy mình bỏ vô nha
 
     public static String webservice_file;
     static String url;
@@ -108,6 +104,15 @@ public class MainActivity extends Activity {
                         Toast.makeText(getBaseContext(), "Không thể load dữ liệu", Toast.LENGTH_LONG).show();
                     }
                 }
+            }
+        });
+        Button btnxem = (Button) findViewById(R.id.btnxem);
+        btnxem.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent ihienthi = new Intent(MainActivity.this,xemthongtin.class);
+                startActivity(ihienthi);
             }
         });
     }
