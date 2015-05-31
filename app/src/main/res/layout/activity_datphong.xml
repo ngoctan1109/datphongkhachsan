@@ -67,7 +67,8 @@
         android:id="@+id/txthoten"
         android:layout_below="@+id/btnphongtrong"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="23dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -133,13 +134,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
-        android:layout_below="@+id/txtsdt"
-        android:layout_alignParentLeft="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/edtsdt"
         android:layout_alignTop="@+id/txtsdt"
         android:layout_alignRight="@+id/edtcmnd"
@@ -164,9 +158,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Email"
         android:id="@+id/txtemail"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/edtsdt"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp" />
 
     <EditText
         android:layout_width="wrap_content"

@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,41 +21,31 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class datphong extends ActionBarActivity {
     TextView txtphong ;
-    EditText hoten , email,ngaynhan,ngaytra,cmnd,sdt;
+    EditText hoten , email,txtngaynhan,txtngaytra,cmnd,sdt;
     Button btndatphong ;
     String id , name ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datphong);
-        EditText txtngaynhan=(EditText)findViewById(R.id.edtngaybd);
-        EditText txtngaytra=(EditText)findViewById(R.id.edtngaytr);
         btndatphong = (Button)findViewById(R.id.btndatphong);
         btndatphong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 InsertData id = new InsertData();
-                id.execute(new String[]{"http://192.168.31.1/hotel/dangkyphong.php"});
+                id.execute(new String[]{"http://192.168.56.1:8080/hotel/dangkyphong.php"});
             }
         });
         hoten = (EditText)findViewById(R.id.edthoten);
         email = (EditText)findViewById(R.id.edtemail);
-        ngaynhan=(EditText)findViewById(R.id.edtngaybd);
-        ngaytra=(EditText)findViewById(R.id.edtngaytr);
+        txtngaynhan=(EditText)findViewById(R.id.edtngaybd);
+        txtngaytra=(EditText)findViewById(R.id.edtngaytr);
         cmnd=(EditText)findViewById(R.id.edtcmnd);
         sdt=(EditText)findViewById(R.id.edtsdt);
         txtphong = (TextView)findViewById(R.id.txtphong);
@@ -128,8 +117,8 @@ public class datphong extends ActionBarActivity {
                     ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
                     pairs.add(new BasicNameValuePair("customer_name", hoten.getText().toString()));
                     pairs.add(new BasicNameValuePair("email", email.getText().toString()));
-                    pairs.add(new BasicNameValuePair("arrive_date", ngaynhan.getText().toString()));
-                    pairs.add(new BasicNameValuePair("leave_date", ngaytra.getText().toString()));
+                    pairs.add(new BasicNameValuePair("arrive_date", txtngaynhan.getText().toString()));
+                    pairs.add(new BasicNameValuePair("leave_date", txtngaytra.getText().toString()));
                     pairs.add(new BasicNameValuePair("mobile", sdt.getText().toString()));
                     pairs.add(new BasicNameValuePair("identity_number", cmnd.getText().toString()));
 
