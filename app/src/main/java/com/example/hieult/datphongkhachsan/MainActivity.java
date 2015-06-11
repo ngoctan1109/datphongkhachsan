@@ -61,13 +61,13 @@ public class MainActivity extends Activity {
     public String url1;
     EditText edit_timkiem;
     ListView lvroom;
+    TextView txtname,txtid;
     public static ListData j;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         edit_timkiem = (EditText) findViewById(R.id.edtloaiphong);
         lvroom = (ListView) findViewById(R.id.lvroom);
         lvroom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -75,8 +75,11 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent in = new Intent(MainActivity.this, datphong.class);
                 Bundle bd = new Bundle();
-                bd.putString("id", lvroom.getAdapter().getItem(position).toString().substring(0, 1));
-                bd.putString("name", lvroom.getAdapter().getItem(position).toString().substring(2, 11));
+                Room getroom=new Room();
+                txtname=(TextView) view.findViewById(R.id.item_name);
+                txtid=(TextView) view.findViewById(R.id.txtid);
+                bd.putString("id", txtid.getText().toString());
+                bd.putString("name", txtname.getText().toString());
                 in.putExtras(bd);
                 startActivity(in);
             }
@@ -176,8 +179,8 @@ public class MainActivity extends Activity {
                     rs.r_name = json_data.getString("name");
                     rs.r_price = json_data.getDouble("price");
                     rs.r_type = json_data.getInt("room_type");
-                    rs.r_img = json_data.getString("image");
-                    rs.r_info = json_data.getString("description");
+                   // rs.r_img = json_data.getString("image");
+                    //rs.r_info = json_data.getString("description");
                     mylist.add(rs);
                 }////
                 ListView lv = (ListView) findViewById(R.id.lvroom);
@@ -219,6 +222,7 @@ public class MainActivity extends Activity {
         }
 
         class ViewHolder {
+            public TextView id = null;
             public TextView info = null;
             public TextView name = null;
             public TextView price = null;
@@ -228,6 +232,7 @@ public class MainActivity extends Activity {
             //        ImageView icon;
 //        TextView text;
             ViewHolder(View row) {
+                id =(TextView) row.findViewById(R.id.txtid);
                 info = (TextView) row.findViewById(R.id.item_info);
                 name = (TextView) row.findViewById(R.id.item_name);
                 price = (TextView) row.findViewById(R.id.item_price);
@@ -236,18 +241,13 @@ public class MainActivity extends Activity {
             }
 
             void populateFrom(Room r) {
+                id.setText(r.r_id);
                 info.setText(r.r_info);
                 name.setText(r.r_name);
                 price.setText("Giá: " + Double.toString(r.r_price) + " vnđ/đêm");
                 type.setText("Loại phòng: " + Room_helpers.getRoomType(r.r_type));
                 image.setImageResource(Room_helpers.getRoomImage(r.r_type));
             }
-        }
-
-
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent idatphong = new Intent(MainActivity.this, datphong.class);
-            startActivity(idatphong);
         }
     }
 }
