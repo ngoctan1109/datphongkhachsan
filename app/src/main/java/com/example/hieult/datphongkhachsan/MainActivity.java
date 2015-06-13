@@ -36,7 +36,7 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
 
     class Room {
-        public int r_id;
+        public String r_id;
         public String r_name;
         public double r_price;
         public int r_type;
@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
                 Bundle bd = new Bundle();
                 Room getroom=new Room();
                 txtname=(TextView) view.findViewById(R.id.item_name);
-                txtid=(TextView) view.findViewById(R.id.txtid);
+                txtid=(TextView) view.findViewById(R.id.item_id);
                 bd.putString("id", txtid.getText().toString());
                 bd.putString("name", txtname.getText().toString());
                 in.putExtras(bd);
@@ -175,7 +175,7 @@ public class MainActivity extends Activity {
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
                     Room rs = new Room();
-                    rs.r_id = json_data.getInt("id");
+                    rs.r_id = json_data.getString("id");
                     rs.r_name = json_data.getString("name");
                     rs.r_price = json_data.getDouble("price");
                     rs.r_type = json_data.getInt("room_type");
@@ -222,8 +222,8 @@ public class MainActivity extends Activity {
         }
 
         class ViewHolder {
-            public TextView id = null;
-            public TextView info = null;
+            public TextView idroom=null;
+            //public TextView info = null;
             public TextView name = null;
             public TextView price = null;
             public TextView type = null;
@@ -232,8 +232,8 @@ public class MainActivity extends Activity {
             //        ImageView icon;
 //        TextView text;
             ViewHolder(View row) {
-                id =(TextView) row.findViewById(R.id.txtid);
-                info = (TextView) row.findViewById(R.id.item_info);
+                idroom = (TextView) row.findViewById(R.id.item_id);
+                //info = (TextView) row.findViewById(R.id.item_info);
                 name = (TextView) row.findViewById(R.id.item_name);
                 price = (TextView) row.findViewById(R.id.item_price);
                 type = (TextView) row.findViewById(R.id.item_room_type);
@@ -241,10 +241,11 @@ public class MainActivity extends Activity {
             }
 
             void populateFrom(Room r) {
-                id.setText(r.r_id);
-                info.setText(r.r_info);
+
+                //info.setText(r.r_info);
                 name.setText(r.r_name);
                 price.setText("Giá: " + Double.toString(r.r_price) + " vnđ/đêm");
+                idroom.setText(r.r_id);
                 type.setText("Loại phòng: " + Room_helpers.getRoomType(r.r_type));
                 image.setImageResource(Room_helpers.getRoomImage(r.r_type));
             }
