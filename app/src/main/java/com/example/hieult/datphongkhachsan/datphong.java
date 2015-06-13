@@ -39,7 +39,10 @@ public class datphong extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 InsertData id = new InsertData();
+                //chổ này mấy bác gõ ipconfig rồi lấy port của máy mình bỏ vô nha
                 id.execute(new String[]{"http://192.168.56.1:8080/hotel/dangkyphong.php"});
+                Intent in = new Intent(datphong.this,xemthongtin.class);
+                startActivity(in);
             }
         });
         hoten = (EditText)findViewById(R.id.edthoten);
