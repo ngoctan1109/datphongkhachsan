@@ -19,7 +19,7 @@ public class Datepicker extends DialogFragment implements DatePickerDialog.OnDat
         txtdate=(EditText)view;
     }
     public Dialog onCreateDialog(Bundle savedInstanceState){
-        final Calendar calendar=Calendar.getInstance();
+        Calendar calendar=Calendar.getInstance();
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH);
         int date=calendar.get(Calendar.DAY_OF_MONTH);
@@ -27,7 +27,7 @@ public class Datepicker extends DialogFragment implements DatePickerDialog.OnDat
     }
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        String Date=year+"-"+monthOfYear+"-"+dayOfMonth;
+        String Date=year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
         txtdate.setText(Date);
     }
 }

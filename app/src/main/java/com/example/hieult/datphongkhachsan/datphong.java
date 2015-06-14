@@ -105,9 +105,9 @@ public class datphong extends ActionBarActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result == true) {
-                Toast.makeText(datphong.this, " Insert thanh cong ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(datphong.this, " Đặt phòng  thành công ", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(datphong.this, " Error ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(datphong.this, " Đã xãy ra lỗi ", Toast.LENGTH_SHORT).show();
             }
 
         }
