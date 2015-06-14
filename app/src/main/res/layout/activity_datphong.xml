@@ -65,10 +65,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Họ Tên"
         android:id="@+id/txthoten"
-        android:layout_below="@+id/btnphongtrong"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp" />
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/edtngaytr" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -99,26 +99,6 @@
         android:layout_below="@+id/txtngaybd"
         android:layout_toRightOf="@+id/txtngaybd"
         android:layout_toEndOf="@+id/txtngaybd" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Phòng Trống"
-        android:id="@+id/btnphongtrong"
-        android:layout_below="@+id/edtngaytr"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PHÒNG CỦA ABC"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/btnphongtrong"
-        android:layout_toRightOf="@+id/btnphongtrong"
-        android:layout_toEndOf="@+id/btnphongtrong"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp" />
 
     <TextView
         android:layout_width="wrap_content"
