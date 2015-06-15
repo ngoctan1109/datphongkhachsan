@@ -36,7 +36,7 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
 
     class Room {
-        public String r_id;
+        public int r_id;
         public String r_name;
         public double r_price;
         public int r_type;
@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
     //public static String base_url = "http://192.168.0.103:80/hotel/"; //chổ này mấy bác gõ ipconfig rồi lấy port của máy mình bỏ vô nha
     public static String base_url = "http://192.168.56.1:8080/hotel/"; //chổ này mấy bác gõ ipconfig rồi lấy port của máy mình bỏ vô nha
 
-    public static String webservice_file;
+    public static String webservice_file,timkiem;
     static String url;
     public String url1;
     EditText edit_timkiem;
@@ -70,12 +70,12 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         edit_timkiem = (EditText) findViewById(R.id.edtloaiphong);
         lvroom = (ListView) findViewById(R.id.lvroom);
+
         lvroom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent in = new Intent(MainActivity.this, datphong.class);
                 Bundle bd = new Bundle();
-                Room getroom=new Room();
                 txtname=(TextView) view.findViewById(R.id.item_name);
                 txtid=(TextView) view.findViewById(R.id.item_id);
                 bd.putString("id", txtid.getText().toString());
@@ -99,10 +99,14 @@ public class MainActivity extends Activity {
                 } else {
                     try {
                         String str = edit_timkiem.getText().toString().toLowerCase();
-                        webservice_file = "timkiem.php?loaiphong=" + Room_helpers.getRoomTypeNumber(str);
-                        url = base_url + webservice_file;
+                        timkiem = "timkiem.php?loaiphong=" + Room_helpers.getRoomTypeNumber(str);
+                        //webservice_file = "test.php";
+                        url = base_url + timkiem;
                         j = new ListData();
                         j.execute();
+                        //lvroom.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+                        //lvroom.smoothScrollToPosition(lvroom.getAdapter().getCount());
+                        //lvroom.setStackFromBottom(true);
                     } catch (Exception e) {
                         Toast.makeText(getBaseContext(), "Không thể load dữ liệu", Toast.LENGTH_LONG).show();
                     }
@@ -175,7 +179,7 @@ public class MainActivity extends Activity {
                 for (int i = 0; i < jArray.length(); i++) {
                     JSONObject json_data = jArray.getJSONObject(i);
                     Room rs = new Room();
-                    rs.r_id = json_data.getString("id");
+                    rs.r_id = json_data.getInt("id");
                     rs.r_name = json_data.getString("name");
                     rs.r_price = json_data.getDouble("price");
                     rs.r_type = json_data.getInt("room_type");
@@ -241,11 +245,11 @@ public class MainActivity extends Activity {
             }
 
             void populateFrom(Room r) {
-
-                //info.setText(r.r_info);
+                idroom.setText(""+r.r_id);
+               //info.setText(r.r_info);
                 name.setText(r.r_name);
                 price.setText("Giá: " + Double.toString(r.r_price) + " vnđ/đêm");
-                idroom.setText(r.r_id);
+
                 type.setText("Loại phòng: " + Room_helpers.getRoomType(r.r_type));
                 image.setImageResource(Room_helpers.getRoomImage(r.r_type));
             }

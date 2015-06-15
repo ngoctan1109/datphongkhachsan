@@ -1,8 +1,5 @@
 package com.example.hieult.datphongkhachsan;
 
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
-
 /**
  * Created by HieuLT on 27/05/2015.
  */
@@ -40,7 +37,7 @@ public class Room_helpers {
     }
 
     public static int getRoomTypeNumber(String str){
-        int rs = 0;
+        int rs=0;
         switch (str){
             case "standard":
                 rs = 1;
